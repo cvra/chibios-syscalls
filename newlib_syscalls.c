@@ -101,3 +101,27 @@ int _isatty_r(struct _reent *r, int fd)
 
     return 1;
 }
+
+void _exit(int status)
+{
+    (void) status;
+    chSysHalt("_exit called");
+}
+
+pid_t _getpid(void)
+{
+    return 1;
+}
+
+int _kill(int pid, int sig)
+{
+    (void)pid;
+    (void)sig;
+    errno = EINVAL;
+    return -1;
+}
+
+int _open_r( struct _reent *ptr, const char *file, int flags, int mode )
+{
+    errno = ENODEV;
+}

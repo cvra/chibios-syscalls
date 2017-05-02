@@ -1,3 +1,4 @@
 target.arm:
     - malloc_lock.c
     - newlib_syscalls.c
+    - newlib_syscalls_cpp.cpp
