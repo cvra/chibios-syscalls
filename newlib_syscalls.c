@@ -12,7 +12,7 @@ extern BaseSequentialStream STDOUT_SD;
 extern BaseSequentialStream STDIN_SD;
 #endif
 
-int _read_r(struct _reent *r, int file, char * ptr, int len)
+int _read_r(struct _reent *r, int file, void * ptr, size_t len)
 {
     (void)r;
 #if defined(STDIN_SD)
@@ -31,7 +31,7 @@ int _read_r(struct _reent *r, int file, char * ptr, int len)
 #endif
 }
 
-int _lseek_r(struct _reent *r, int file, int ptr, int dir)
+_off_t _lseek_r(struct _reent *r, int file, _off_t ptr, int dir)
 {
     (void)r;
     (void)file;
@@ -41,7 +41,7 @@ int _lseek_r(struct _reent *r, int file, int ptr, int dir)
     return 0;
 }
 
-int _write_r(struct _reent *r, int file, char * ptr, int len)
+ssize_t _write_r(struct _reent *r, int file, const void * ptr, size_t len)
 {
     (void)r;
     (void)file;
@@ -64,7 +64,7 @@ int _close_r(struct _reent *r, int file)
     return 0;
 }
 
-caddr_t _sbrk_r(struct _reent *r, int incr)
+void* _sbrk_r(struct _reent *r, ptrdiff_t incr)
 {
 #if CH_CFG_USE_MEMCORE
     void *p;

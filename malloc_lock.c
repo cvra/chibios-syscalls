@@ -7,13 +7,13 @@ static MUTEX_DECL(lock);
 #error "Malloc lock must be recursive, please enable CH_CFG_USE_MUTEXES_RECURSIVE"
 #endif
 
-void __malloc_lock (struct _reent *reent)
+void __malloc_lock(struct _reent *reent)
 {
     (void) reent;
     chMtxLock(&lock);
 }
 
-void __malloc_unlock (struct _reent *reent)
+void __malloc_unlock(struct _reent *reent)
 {
     (void) reent;
     chMtxUnlock(&lock);
